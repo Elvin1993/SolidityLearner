@@ -16,16 +16,25 @@ contract FuntionViiblitySpecifiers {
     }
 
     // 仅在内部使用 外部无法调用
-    function getCreate() internal view returns (address) {
-      return u_creater1;
+    function getInternalSender() internal view returns (address) {
+
+      return msg.sender;
+    }
+
+    function getA() external view returns (int) {
+      return a;
+    }
+
+    function setA(int _a) external {
+      a = _a;
     }
 
     // 获取私有变量a 的值和调用者的钱包地址
-    function getA() external view returns (int, address, address) {
+    function getInfo() external view returns (address, address, address) {
       address sender = msg.sender;
       // 调用internal方法
-      address creater = getCreate();
-      return (a, sender, creater);
+      address sender1 = getInternalSender();
+      return (u_creater1, sender, sender1);
     }
 
 }
